@@ -12,7 +12,7 @@ _branch=master
 _gitname=$_basename
 pkgname=$_basename-git
 
-pkgver=0.1.3.r17.g9d3c1ed
+pkgver=0.2.r1.g07c584a
 
 pkgrel=1
 pkgdesc="QML based settings application for nemomobile"
