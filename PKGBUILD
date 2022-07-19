@@ -11,7 +11,7 @@ pkgdesc="QML based settings application for nemomobile"
 arch=('x86_64' 'aarch64')
 url="https://github.com/nemomobile-ux/glacier-settings"
 license=('BSD-3-Clause')
-depends=('qt5-glacier-app-git'
+depends=('qt5-glacier-app'
     'qt5-location'
     'nemo-qml-plugin-devicelock'
     'nemo-qml-plugin-settings'
