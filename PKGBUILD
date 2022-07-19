@@ -4,53 +4,35 @@
 # Contributor: Alexey Andreyev <aa13q@ya.ru>
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
-_host="github.com"
-_project=nemomobile-ux
-_basename=glacier-settings
-_branch=master
-
-_gitname=$_basename
-pkgname=$_basename-git
-
-pkgver=0.4.r47.g0a16495
-
-pkgrel=2
+pkgname=glacier-settings
+pkgver=0.6
+pkgrel=1
 pkgdesc="QML based settings application for nemomobile"
 arch=('x86_64' 'aarch64')
-url="https://$_host/$_project/$_gitname#branch=$_branch"
+url="https://github.com/nemomobile-ux/glacier-settings"
 license=('BSD-3-Clause')
 depends=('qt5-glacier-app-git'
-	'qt5-location'
-	'nemo-qml-plugin-devicelock-git'
-	'nemo-qml-plugin-settings-git'
-	'qt5-connman-git'
-	'qt5-mce-git'
-	'nemo-qml-plugin-connectivity-git'
-	'nemo-qml-plugin-models>=0.2.1'
-	'qt5-systems>=5.12'
-	'nemo-qml-plugin-systemsettings')
-makedepends=('git' 'qt5-tools' 'cmake')
-provides=("${pkgname%-git}")
-conflicts=("${pkgname%-git}")
-source=("${pkgname}::git+${url}")
-sha256sums=('SKIP')
-
-pkgver() {
-  cd "${srcdir}/${pkgname}"
-  ( set -o pipefail
-    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-  ) 2>/dev/null
-}
+    'qt5-location'
+    'nemo-qml-plugin-devicelock'
+    'nemo-qml-plugin-settings'
+    'libconnman-qt'
+    'libmce-qt'
+    'nemo-qml-plugin-connectivity'
+    'nemo-qml-plugin-configuration'
+    'nemo-qml-plugin-models>=0.2.1'
+    'nemo-qml-plugin-systemsettings>=0.8.0')
+makedepends=('qt5-tools' 'cmake')
+source=("${url}/archive/refs/tags/$pkgver.tar.gz")
+sha256sums=('2d374b00c7721c8140f63cd6ecdabd11a84d16b44cdd012ff7a721fa1b8bda53')
 
 build() {
+    cd $pkgname-$pkgver
     cmake \
-        -B "${pkgname}/build" \
-        -S "${pkgname}" \
         -DCMAKE_INSTALL_PREFIX:PATH='/usr'
-    make -C "${pkgname}/build" all
+    make all
 }
 
 package() {
-    make -C "${srcdir}/${pkgname}/build" DESTDIR="$pkgdir" install
+    cd $pkgname-$pkgver
+    make DESTDIR="$pkgdir" install
 }
