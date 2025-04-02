@@ -28,7 +28,8 @@ sha256sums=('2cd7576d22f11e73b8ed3930ae9f3b20cbe91a7e72a753b275a6d020d18c23f3')
 build() {
     cd $pkgname-$pkgver
     cmake \
-        -DCMAKE_INSTALL_PREFIX:PATH='/usr'
+        -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
+        -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     make all
 }
 
