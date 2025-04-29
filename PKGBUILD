@@ -5,7 +5,7 @@
 # Maintainer: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
 
 pkgname=glacier-settings
-pkgver=0.8.7
+pkgver=0.8.8
 pkgrel=1
 pkgdesc="QML based settings application for nemomobile"
 arch=('x86_64' 'aarch64')
@@ -23,7 +23,7 @@ depends=('qt6-glacier-app'
     'nemo-qml-plugin-systemsettings>=0.8.0')
 makedepends=('qt6-tools' 'clang' 'cmake')
 source=("${url}/archive/refs/tags/$pkgver.tar.gz")
-sha256sums=('de217cdbd0ff0f819c0a28c725f36867028b4d8ce1e35093180b09be978991de')
+sha256sums=('92d099a5af819b2cef40eeb2519a6569881725d7f2a773adb93fa29d0a9e70a6')
 
 build() {
     cd $pkgname-$pkgver
