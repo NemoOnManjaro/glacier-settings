@@ -27,14 +27,14 @@ source=("${url}/archive/refs/tags/$pkgver.tar.gz")
 sha256sums=('353ac4d95c3522c33b463ec33f86ce77b3b5014693936d2dfe8c87a19ab18df3')
 
 build() {
-    cd $pkgname-$pkgver
     cmake \
+        -B "${pkgname}-${pkgver}/build" \
+        -S "${pkgname}-${pkgver}" \
         -DCMAKE_INSTALL_PREFIX:PATH='/usr' \
         -DCMAKE_POLICY_VERSION_MINIMUM=3.5
-    make all
+    cmake --build "${pkgname}-${pkgver}/build" -v
 }
 
 package() {
-    cd $pkgname-$pkgver
-    make DESTDIR="$pkgdir" install
+    DESTDIR="$pkgdir" cmake --install "${pkgname}-${pkgver}/build"
 }
